@@ -14,5 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   maxSpeed: 6
-  accaleration: 20
-  deceleration: 30
+  accaleration: 30
+  deceleration: 50
+  dashChargetime: 0.3
+  dashPower: 5
