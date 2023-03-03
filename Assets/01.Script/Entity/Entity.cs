@@ -23,7 +23,7 @@ public class Entity : MonoBehaviour
         _entityActions = (from action in tempActions orderby action.ActionType ascending select action).ToList();
         _agentInput = GetComponent<AgentInput>();
         _agentRenderer = transform.Find("AgentRenderer").GetComponent<AgentRenderer>();
-        _agentAnimation = _agentAnimation.GetComponent<AgentAnimation>();
+        _agentAnimation = _agentRenderer.GetComponent<AgentAnimation>();
     }
     /// <summary>
     /// 인자로 넘긴 액션들을 강제 종료
@@ -80,5 +80,11 @@ public class Entity : MonoBehaviour
             return null;
         }
         return _entityActions[((int)type) - 1];
+    }
+
+    public T GetEntityType<T>(ActionType type) where T : EntityAction
+    {
+        EntityAction entityAction = GetEntityAction(type);
+        return entityAction as T;
     }
 }

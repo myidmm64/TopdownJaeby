@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class AgentRenderer : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private SpriteRenderer _spriteRenderer = null;
+    public bool Fliped => _spriteRenderer.flipX;
+
+    private void Awake()
     {
-        
+        _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Flip(Vector2 input)
     {
-        
+        if (input.x < 0f)
+            _spriteRenderer.flipX = true;
+        else if (input.x > 0f)
+            _spriteRenderer.flipX = false;
     }
 }

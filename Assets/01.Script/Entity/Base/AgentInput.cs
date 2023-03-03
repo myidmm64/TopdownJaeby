@@ -12,16 +12,32 @@ public class AgentInput : MonoBehaviour
     private UnityEvent<Vector2> OnPointerPositionChanged = null;
     [SerializeField]
     private UnityEvent OnDashKeyPress = null;
+    [SerializeField]
+    private UnityEvent OnAttackKeyPress = null;
 
     private Vector2 _inputVec = Vector2.zero;
     public Vector2 InputVec => _inputVec;
     public Vector2 InputVecNorm => _inputVec.normalized;
+
+    private Entity _entity = null;
+
+    private void Awake()
+    {
+        _entity = GetComponent<Entity>();
+    }
 
     private void Update()
     {
         GetPointerInput();
         GetMovementInput();
         GetDashInput();
+        GetAttackInput();
+    }
+
+    private void GetAttackInput()
+    {
+        if (Input.GetMouseButtonDown(0))
+            OnAttackKeyPress?.Invoke();
     }
 
     private void GetDashInput()
@@ -41,6 +57,8 @@ public class AgentInput : MonoBehaviour
 
     private void GetMovementInput()
     {
+        if (_entity.EntityActionLockCheck(ActionType.Move))
+            return;
         _inputVec = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         OnMovementKeyPress?.Invoke(_inputVec);
     }
