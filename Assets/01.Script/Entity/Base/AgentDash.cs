@@ -32,12 +32,6 @@ public class AgentDash : MonoBehaviour
 
     private IEnumerator DashCoroutine()
     {
-        _dashing = true;
-        _agentMove.MoveLock = true;
-        _rigid.velocity = _agentInput.InputVecNorm * _moveDataSO.dashPower;
-        _playerAnimation.DashAnimation();
         yield return new WaitForSeconds(0.3f);
-        _agentMove.MoveLock = false;
-        _dashing = false;
     }
 }

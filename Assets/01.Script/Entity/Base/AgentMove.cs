@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class AgentMove : MonoBehaviour
+public class AgentMove : EntityAction
 {
     [SerializeField]
     private MovementDataSO _movementSO = null;
@@ -14,11 +14,9 @@ public class AgentMove : MonoBehaviour
 
     public UnityEvent<float> OnvelocityChange; //속도 바뀔 때 실행될 이벤트
 
-    private bool _moveLock = false;
-    public bool MoveLock { get => _moveLock; set => _moveLock = value; }
-
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         _rigid = GetComponent<Rigidbody2D>();
     }
 
@@ -51,7 +49,7 @@ public class AgentMove : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (_moveLock)
+        if (_locked)
             return;
         OnvelocityChange?.Invoke(_currentVelocity);
         _rigid.velocity = _movementDirection * _currentVelocity;
@@ -61,5 +59,10 @@ public class AgentMove : MonoBehaviour
     {
         _currentVelocity = 0;
         _rigid.velocity = Vector2.zero;
+    }
+
+    public override void ActionExit()
+    {
+        StopImmediatelly();
     }
 }
