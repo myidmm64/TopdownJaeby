@@ -82,7 +82,7 @@ public class Entity : MonoBehaviour
         return _entityActions[((int)type) - 1];
     }
 
-    public T GetEntityType<T>(ActionType type) where T : EntityAction
+    public T GetEntityAction<T>(ActionType type) where T : EntityAction
     {
         EntityAction entityAction = GetEntityAction(type);
         return entityAction as T;

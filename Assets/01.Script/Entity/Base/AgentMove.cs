@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class AgentMove : EntityAction
 {
@@ -12,7 +11,8 @@ public class AgentMove : EntityAction
     protected float _currentVelocity = 3;
     protected Vector2 _movementDirection;
 
-    public UnityEvent<float> OnvelocityChange; //속도 바뀔 때 실행될 이벤트
+    private Vector3 _moveAmount = Vector3.zero;
+    private Vector3 _extraMoveAmount = Vector3.zero;
 
     protected override void Awake()
     {
@@ -49,20 +49,43 @@ public class AgentMove : EntityAction
 
     private void FixedUpdate()
     {
-        if (_locked)
-            return;
-        OnvelocityChange?.Invoke(_currentVelocity);
-        _rigid.velocity = _movementDirection * _currentVelocity;
+        _moveAmount = (_locked == false) ? _movementDirection * _currentVelocity : Vector2.zero;
+        _rigid.velocity = _moveAmount + _extraMoveAmount;
     }
 
-    public void StopImmediatelly()
+    public void VelocitySetMove(float? x = null, float? y = null)
     {
-        _currentVelocity = 0;
-        _rigid.velocity = Vector2.zero;
+        if (x == null)
+            x = _moveAmount.x;
+        if (y == null)
+            y = _moveAmount.y;
+        _moveAmount = new Vector3(x.Value, y.Value, 0f);
+    }
+
+    public void VelocitySetExtra(float? x = null, float? y = null)
+    {
+        if (x == null)
+            x = _extraMoveAmount.x;
+        if (y == null)
+            y = _extraMoveAmount.y;
+        _extraMoveAmount = new Vector3(x.Value, y.Value, 0f);
+    }
+
+    public void VeloCityResetImm(bool x = false, bool y = false)
+    {
+        if (x)
+        {
+            _moveAmount.x = _extraMoveAmount.x = 0f;
+        }
+        if (y)
+        {
+            _moveAmount.y = _extraMoveAmount.y = 0f;
+        }
     }
 
     public override void ActionExit()
     {
-        StopImmediatelly();
+        VeloCityResetImm(true,true);
+        _rigid.velocity = Vector2.zero;
     }
 }

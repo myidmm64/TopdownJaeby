@@ -15,14 +15,18 @@ public class AgentAnimation : MonoBehaviour
         _animator = GetComponent<Animator>();
     }
 
-    public void MoveAnimation(Vector2 input)
+    public void DirSet(Vector2 input)
     {
-        _animator.SetBool("Move", input.sqrMagnitude > 0f);
         if (input.sqrMagnitude > 0f)
         {
             _animator.SetFloat("Horizontal", input.x);
             _animator.SetFloat("Vertical", input.y);
         }
+    }
+
+    public void MoveAnimation(Vector2 input)
+    {
+        _animator.SetBool("Move", input.sqrMagnitude > 0f);
     }
 
     public IEnumerator WaitCoroutine(string name, int layerIndex)

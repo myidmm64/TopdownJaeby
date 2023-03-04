@@ -15,15 +15,22 @@ public class AgentInput : MonoBehaviour
     [SerializeField]
     private UnityEvent OnAttackKeyPress = null;
 
-    private Vector2 _inputVec = Vector2.zero;
-    public Vector2 InputVec => _inputVec;
-    public Vector2 InputVecNorm => _inputVec.normalized;
+    private Vector2 _moveInputVec = Vector2.zero;
+    public Vector2 MoveInputVec => _moveInputVec;
+    public Vector2 MoveInputVecNorm => _moveInputVec.normalized;
+
+    private Vector2 _pointerInputVec = Vector2.zero;
+    public Vector2 PointerInputVec => _pointerInputVec;
+    public Vector2 PointerInputVecNorm => _pointerInputVec.normalized;
+    public Vector2 PointerDistance => _pointerInputVec - (Vector2)transform.position;
 
     private Entity _entity = null;
+    private Camera _cam = null;
 
     private void Awake()
     {
         _entity = GetComponent<Entity>();
+        _cam = Camera.main;
     }
 
     private void Update()
@@ -50,16 +57,15 @@ public class AgentInput : MonoBehaviour
     {
         Vector3 mousePos = Input.mousePosition;
         mousePos.z = 0;
-        //매우 안좋음
-        Vector2 mouseInWorldPos = Camera.main.ScreenToWorldPoint(mousePos);
-        OnPointerPositionChanged.Invoke(mouseInWorldPos);
+        _pointerInputVec = _cam.ScreenToWorldPoint(mousePos);
+        OnPointerPositionChanged.Invoke(_pointerInputVec);
     }
 
     private void GetMovementInput()
     {
         if (_entity.EntityActionLockCheck(ActionType.Move))
             return;
-        _inputVec = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        OnMovementKeyPress?.Invoke(_inputVec);
+        _moveInputVec = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        OnMovementKeyPress?.Invoke(_moveInputVec);
     }
 }

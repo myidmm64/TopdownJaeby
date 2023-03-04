@@ -16,5 +16,5 @@ MonoBehaviour:
   maxSpeed: 6
   accaleration: 30
   deceleration: 50
-  dashChargetime: 0.3
-  dashPower: 5
+  dashChargetime: 0.15
+  dashPower: 12
