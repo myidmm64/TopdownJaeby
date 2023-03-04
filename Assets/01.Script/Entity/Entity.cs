@@ -5,6 +5,11 @@ using System.Linq;
 
 public class Entity : MonoBehaviour
 {
+    [SerializeField]
+    private MovementDataSO _movementDataSO = null;
+    [SerializeField]
+    private AttackSO _attackSO = null;
+
     private List<EntityAction> _entityActions = new List<EntityAction>();
 
     protected AgentInput _agentInput = null;
@@ -12,6 +17,9 @@ public class Entity : MonoBehaviour
     protected AgentAnimation _agentAnimation = null;
 
     #region 프로퍼티
+    public MovementDataSO movementDataSO => _movementDataSO;
+    public AttackSO attackSO => _attackSO;
+
     public AgentInput AgentInput => _agentInput;
     public AgentRenderer AgentRenderer => _agentRenderer;
     public AgentAnimation AgentAnimation => _agentAnimation;

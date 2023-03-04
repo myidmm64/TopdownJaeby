@@ -26,7 +26,7 @@ public class AgentAnimation : MonoBehaviour
 
     public void MoveAnimation(Vector2 input)
     {
-        _animator.SetBool("Move", input.sqrMagnitude > 0f);
+        _animator.SetBool("Walk", input.sqrMagnitude > 0f);
     }
 
     public IEnumerator WaitCoroutine(string name, int layerIndex)

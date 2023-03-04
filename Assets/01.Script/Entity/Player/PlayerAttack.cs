@@ -10,6 +10,8 @@ public class PlayerAttack : AgentAttack
     private bool _delayLock = false;
 
     [SerializeField]
+    private LayerMask _attackLayer = 0;
+    [SerializeField]
     private float _indexResetTime = 0.2f;
     [SerializeField]
     private int _maxAttackIndex = 2;
@@ -52,7 +54,7 @@ public class PlayerAttack : AgentAttack
         _entity.AgentAnimation.AnimationForcePlay(aniName);
         yield return StartCoroutine(_entity.AgentAnimation.WaitCoroutine(aniName, 0));
         _entity.EntityActionLock(false, ActionType.Move, ActionType.Dash);
-        yield return new WaitForSeconds(_baseAttackSO.baseAttackData.delays[_attackIndex]);
+        yield return new WaitForSeconds(_entity.attackSO.baseAttackData.delays[_attackIndex]);
         _delayLock = false;
 
         _resetCoroutine = StartCoroutine(IndexResetCoroutine());
@@ -62,6 +64,7 @@ public class PlayerAttack : AgentAttack
     {
         Collider2D[] targets = Physics2D.OverlapCircleAll((Vector2)transform.position + _player.GetDir(), 1f);
         for (int i = 0; i < targets.Length; i++)
-            targets[i].GetComponent<AgentHP>().Hit(_baseAttackSO.baseAttackData.damages[_attackIndex]);
+            if ((targets[i].gameObject.layer & (1 << _attackLayer)) != 0)
+                targets[i].GetComponent<AgentHP>().Hit(_entity.attackSO.baseAttackData.damages[_attackIndex]);
     }
 }

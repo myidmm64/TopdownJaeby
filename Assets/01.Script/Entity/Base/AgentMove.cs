@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class AgentMove : EntityAction
 {
-    [SerializeField]
-    private MovementDataSO _movementSO = null;
     private Rigidbody2D _rigid = null;
 
     protected float _currentVelocity = 3;
@@ -38,13 +36,13 @@ public class AgentMove : EntityAction
     {
         if (movementInput.sqrMagnitude > 0)
         {
-            _currentVelocity += _movementSO.accaleration * Time.deltaTime;
+            _currentVelocity += _entity.movementDataSO.accaleration * Time.deltaTime;
         }
         else
         {
-            _currentVelocity -= _movementSO.deceleration * Time.deltaTime;
+            _currentVelocity -= _entity.movementDataSO.deceleration * Time.deltaTime;
         }
-        return Mathf.Clamp(_currentVelocity, 0, _movementSO.maxSpeed);
+        return Mathf.Clamp(_currentVelocity, 0, _entity.movementDataSO.maxSpeed);
     }
 
     private void FixedUpdate()
