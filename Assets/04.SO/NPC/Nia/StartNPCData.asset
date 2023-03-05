@@ -15,4 +15,4 @@ MonoBehaviour:
   faceSprite: {fileID: 21300000, guid: f1e170aeafd3b33478033d1efcc06236, type: 3}
   npcName: "\uB2C8\uC544"
   subName: "\uAE38 \uC783\uC740 \uC790"
-  subColor: {r: 0.24563903, g: 0.26046312, b: 0.754717, a: 1}
+  subColor: {r: 0.4292453, g: 0.44251865, b: 1, a: 1}

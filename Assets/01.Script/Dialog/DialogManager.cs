@@ -53,18 +53,19 @@ public class DialogManager : MonoSingleTon<DialogManager>
             StartCoroutine(DialogCooltimeCoroutine());
     }
 
-    public void DialogStart(DialogDataSO data, Action Callback = null)
+    public bool DialogStart(DialogDataSO data, Action Callback = null)
     {
-        if (_dialogLock)
-            return;
+        if (_dialogLock || _excuting)
+            return false;
+        _excuting = true;
+        _input = false;
         _dialogCanvas.SetActive(true);
-
         _dialogCoroutine = StartCoroutine(DialogCoroutine(data, Callback));
+        return true;
     }
 
     private IEnumerator DialogCoroutine(DialogDataSO data, Action Callback = null)
     {
-        _excuting = true;
         _sb.Clear();
         DialogData curData = null;
         for (int i = 0; i < data.dialogDatas.Count; i++)

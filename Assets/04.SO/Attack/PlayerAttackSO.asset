@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlayerAttackSO
   m_EditorClassIdentifier: 
   baseAttackData:
-    damages: 050000000a00000014000000
+    damages: 050000000500000006000000
     delays:
     - 0
     - 0

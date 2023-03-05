@@ -43,8 +43,14 @@ public class NPC : MonoBehaviour
     {
         if (_doInteractObj.activeSelf == false || _dialoging)
             return;
-        _dialoging = true;
-        DialogManager.Instance.DialogStart(_dialogDataSO, () => { _dialogDataSO = _dialogDataSO.nextData; _dialoging = false; });
+        if(DialogManager.Instance.DialogStart(_dialogDataSO, () => { _dialogDataSO = _dialogDataSO.nextData; _dialoging = false; }))
+        {
+            _dialoging = true;
+        }
+        else
+        {
+
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
