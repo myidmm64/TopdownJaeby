@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using System;
 
 public class PopupManager : MonoSingleTon<PopupManager>
 {
-    public void Popup(string text, Vector2 pos, PopupDataSO data)
+    public void Popup(PopupDataSO data, string text, Vector2 pos, Action Callback = null)
     {
         PopupPoolObject popupPoolObj = PoolManager.Pop(PoolType.PopText).GetComponent<PopupPoolObject>();
         switch (data.popupType)
@@ -13,7 +14,7 @@ public class PopupManager : MonoSingleTon<PopupManager>
             case PopupType.None:
                 break;
             case PopupType.Punch:
-                popupPoolObj.PunchPopup(text, pos, data.punchSize, data.duration, data.fontSize, data.color);
+                popupPoolObj.PunchPopup(data, text, pos, Callback);
                 break;
             case PopupType.Drop:
                 break;

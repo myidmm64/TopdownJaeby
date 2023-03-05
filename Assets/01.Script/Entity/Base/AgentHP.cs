@@ -68,16 +68,16 @@ public class AgentHP : MonoBehaviour
     {
         HP -= amount;
         bool critical = Random.Range(0, 100) < 50;
-        PopupManager.Instance.Popup(amount.ToString(), (Vector2)transform.position + Vector2.up * 0.5f, (critical) ? _hitDataSO.criticalData : _hitDataSO.normalData);
-        PoolManager.Pop(_hitDataSO.hitEffect).transform.position = transform.position;
+        PopupManager.Instance.Popup((critical) ? _hitDataSO.criticalData : _hitDataSO.normalData, amount.ToString(), (Vector2)transform.position + Vector2.up * 0.5f);
         CameraManager.Instance.CameraShake(_hitDataSO.emplitude, _hitDataSO.intensity, _hitDataSO.cameraDuration);
         TimeManager.Instance.TimeScaleChange(_hitDataSO.startScale, 1f, (HP == 0) ? _hitDataSO.DieTimeDuration : _hitDataSO.hitTimeDuration);
+        PoolManager.Pop((HP == 0) ? _hitDataSO.dieEffect : _hitDataSO.hitEffect).transform.position = transform.position;
         if (HP == 0)
             Die();
     }
 
     private void Die()
     {
-
+        Destroy(gameObject);
     }
 }

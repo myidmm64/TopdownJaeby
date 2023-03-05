@@ -45,6 +45,8 @@ public class PlayerAttack : AgentAttack
 
     private IEnumerator AttackCoroutine()
     {
+        _player.DirSet(_entity.AgentInput.PointerDistance.normalized);
+        _player.DirSetLock = true;
         _delayLock = true;
         _attackIndex = (_attackIndex + 1) % _maxAttackIndex;
         AttackColliderCreate();
@@ -54,6 +56,8 @@ public class PlayerAttack : AgentAttack
         _entity.AgentAnimation.AnimationForcePlay(aniName);
         yield return StartCoroutine(_entity.AgentAnimation.WaitCoroutine(aniName, 0));
         _entity.EntityActionLock(false, ActionType.Move, ActionType.Dash);
+        _player.DirSetLock = false;
+
         yield return new WaitForSeconds(_entity.attackSO.baseAttackData.delays[_attackIndex]);
         _delayLock = false;
 

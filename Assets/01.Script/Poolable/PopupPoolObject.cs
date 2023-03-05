@@ -50,36 +50,33 @@ public class PopupPoolObject : PoolAbleObject
         });
     }
 
-    public void PunchPopup(string text, Vector2 pos, float size, float duration, float fontSize, Color color, Action Callback = null)
+    public void PunchPopup(PopupDataSO data, string text, Vector2 pos, Action Callback = null)
     {
         _text.SetText(text);
-        _text.fontSize = fontSize;
-        _text.color = color;
+        _text.fontSize = data.fontSize;
+        _text.color = data.color;
         transform.position = pos;
-        transform.localScale = Vector2.one * size;
+        transform.localScale = Vector2.one * data.punchSize;
 
         _seq = DOTween.Sequence();
-        _seq.Append(transform.DOScale(1f, duration));
-        _seq.AppendCallback(() =>
-        {
-            Callback?.Invoke();
-            PoolManager.Push(poolType, gameObject);
-        });
+        _seq.Append(transform.DOScale(1f, data.duration));
+        _seq.AppendCallback(() => { Callback?.Invoke(); });
+        _seq.Append(_text.DOFade(0f, data.fadeDuration));
+        _seq.AppendCallback(() => { PoolManager.Push(poolType, gameObject); });
     }
 
-    public void DropPopup(string text, Vector2 pos, Vector2 endPos, float duration, float fontSize, Color color, Action Callback = null)
+    public void DropPopup(PopupDataSO data, string text, Vector2 pos, Vector2 endPos, Action Callback = null)
     {
         _text.SetText(text);
-        _text.fontSize = fontSize;
-        _text.color = color;
+        _text.fontSize = data.fontSize;
+        _text.color = data.color;
         transform.position = pos;
+        transform.localScale = Vector2.one * data.punchSize;
 
         _seq = DOTween.Sequence();
-        _seq.Append(transform.DOJump(endPos, 2f, 1, duration));
-        _seq.AppendCallback(() =>
-        {
-            Callback?.Invoke();
-            PoolManager.Push(poolType, gameObject);
-        });
+        _seq.Append(transform.DOJump(endPos, 2f, 1, data.duration));
+        _seq.AppendCallback(() => { Callback?.Invoke(); });
+        _seq.Append(_text.DOFade(0f, data.fadeDuration));
+        _seq.AppendCallback(() => { PoolManager.Push(poolType, gameObject); });
     }
 }
