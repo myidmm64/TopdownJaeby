@@ -19,3 +19,5 @@ MonoBehaviour:
   hitTimeDuration: 0.05
   DieTimeDuration: 0.1
   hitEffect: 3
+  normalData: {fileID: 11400000, guid: 739fb0f831cd5cf47ab148709480599c, type: 2}
+  criticalData: {fileID: 11400000, guid: 002cd3a2005af414ab67cc08b347d50b, type: 2}

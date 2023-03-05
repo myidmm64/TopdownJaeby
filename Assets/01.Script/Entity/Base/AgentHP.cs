@@ -67,6 +67,8 @@ public class AgentHP : MonoBehaviour
     public void Hit(int amount)
     {
         HP -= amount;
+        bool critical = Random.Range(0, 100) < 50;
+        PopupManager.Instance.Popup(amount.ToString(), (Vector2)transform.position + Vector2.up * 0.5f, (critical) ? _hitDataSO.criticalData : _hitDataSO.normalData);
         PoolManager.Pop(_hitDataSO.hitEffect).transform.position = transform.position;
         CameraManager.Instance.CameraShake(_hitDataSO.emplitude, _hitDataSO.intensity, _hitDataSO.cameraDuration);
         TimeManager.Instance.TimeScaleChange(_hitDataSO.startScale, 1f, (HP == 0) ? _hitDataSO.DieTimeDuration : _hitDataSO.hitTimeDuration);

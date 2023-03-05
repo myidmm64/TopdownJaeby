@@ -15,4 +15,6 @@ public class HitDataSO : ScriptableObject
     public float DieTimeDuration = 0.05f;
     [Header("ÇÇ°Ý")]
     public PoolType hitEffect = PoolType.None;
+    public PopupDataSO normalData = null;
+    public PopupDataSO criticalData = null;
 }
