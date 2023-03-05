@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Detect
   layers:
   - Default
   - TransparentFX
@@ -13,7 +14,7 @@ TagManager:
   - UI
   - Player
   - Enemy
-  - 
+  - MoveCollider
   - 
   - 
   - 
@@ -49,4 +50,10 @@ TagManager:
     locked: 0
   - name: Layer 3
     uniqueID: 4189426099
+    locked: 0
+  - name: Agent
+    uniqueID: 750554803
+    locked: 0
+  - name: UI
+    uniqueID: 681987777
     locked: 0

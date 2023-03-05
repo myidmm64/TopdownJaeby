@@ -15,6 +15,6 @@ MonoBehaviour:
   popupType: 1
   fontSize: 3.5
   color: {r: 1, g: 0, b: 0, a: 1}
-  duration: 0.15
-  fadeDuration: 0.3
+  duration: 0.2
+  fadeDuration: 0.5
   punchSize: 2.5
