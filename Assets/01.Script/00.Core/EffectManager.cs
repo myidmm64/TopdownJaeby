@@ -1,8 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
+using System;
 
-public class EffectManager : MonoBehaviour
+public class EffectManager : MonoSingleTon<EffectManager>
 {
-    // ƒ´∏ﬁ∂Û Ω¶¿Ã≈©, Ω√∞£∏ÿ√„
+    private CameraManager _camManager = null;
+    private TimeManager _timeManager = null;
+
 }

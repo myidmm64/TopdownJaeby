@@ -9,12 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8408cc6631eaf54a8727e4f0c378738, type: 3}
-  m_Name: BatMovementData
+  m_Script: {fileID: 11500000, guid: 8f9dd24b4209bdd419905e37e905a8fd, type: 3}
+  m_Name: NormalHitData
   m_EditorClassIdentifier: 
-  speed: 0.7
-  maxSpeed: 1
-  accaleration: 30
-  deceleration: 50
-  dashChargetime: 0.15
-  dashPower: 12
+  emplitude: 10
+  intensity: 3.5
+  cameraDuration: 0.15
+  startScale: 0.2
+  hitTimeDuration: 0.05
+  DieTimeDuration: 0.1
+  hitEffect: 3

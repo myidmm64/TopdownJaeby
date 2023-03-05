@@ -9,12 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8408cc6631eaf54a8727e4f0c378738, type: 3}
-  m_Name: BatMovementData
+  m_Script: {fileID: 11500000, guid: 269deb5ad78fcb844adfdec922e86b9a, type: 3}
+  m_Name: PoolData
   m_EditorClassIdentifier: 
-  speed: 0.7
-  maxSpeed: 1
-  accaleration: 30
-  deceleration: 50
-  dashChargetime: 0.15
-  dashPower: 12
+  poolDatas:
+  - poolType: 3
+    initCount: 10
+    poolAbleObject: {fileID: 6002900245378331656, guid: cfa9c1c8a67336c40a85150b812ceb5a,
+      type: 3}

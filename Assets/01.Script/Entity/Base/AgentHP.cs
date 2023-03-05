@@ -7,6 +7,9 @@ using UnityEngine.UI;
 public class AgentHP : MonoBehaviour
 {
     [SerializeField]
+    private HitDataSO _hitDataSO = null;
+
+    [SerializeField]
     private Slider _hpSlider = null;
     [SerializeField]
     private TextMeshProUGUI _hpText = null;
@@ -64,6 +67,9 @@ public class AgentHP : MonoBehaviour
     public void Hit(int amount)
     {
         HP -= amount;
+        PoolManager.Pop(_hitDataSO.hitEffect).transform.position = transform.position;
+        CameraManager.Instance.CameraShake(_hitDataSO.emplitude, _hitDataSO.intensity, _hitDataSO.cameraDuration);
+        TimeManager.Instance.TimeScaleChange(_hitDataSO.startScale, 1f, (HP == 0) ? _hitDataSO.DieTimeDuration : _hitDataSO.hitTimeDuration);
         if (HP == 0)
             Die();
     }
