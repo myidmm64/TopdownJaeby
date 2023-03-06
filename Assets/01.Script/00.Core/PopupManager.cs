@@ -13,6 +13,9 @@ public class PopupManager : MonoSingleTon<PopupManager>
         {
             case PopupType.None:
                 break;
+            case PopupType.Up:
+                popupPoolObj.PopupText(data, text, pos, pos + Vector2.up * 0.5f, Callback);
+                break;
             case PopupType.Punch:
                 popupPoolObj.PunchPopup(data, text, pos, Callback);
                 break;
@@ -28,6 +31,7 @@ public class PopupManager : MonoSingleTon<PopupManager>
 public enum PopupType
 {
     None,
+    Up,
     Punch,
     Drop
 }

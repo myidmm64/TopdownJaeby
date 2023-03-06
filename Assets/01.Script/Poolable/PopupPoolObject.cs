@@ -35,19 +35,18 @@ public class PopupPoolObject : PoolAbleObject
         _text.color = Color.white;
     }
 
-    public void PopupText(Vector2 startPos, Vector2 lastPos, Color color, float duration, int fontSize) // 시작 포지션, 마지막 포지션, 색깔, 폰트사이즈, 사이즈
+    public void PopupText(PopupDataSO data, string text, Vector2 pos, Vector2 lastPos, Action Callback = null) // 시작 포지션, 마지막 포지션, 색깔, 폰트사이즈, 사이즈
     {
-        transform.position = startPos;
-        _text.color = color;
-        _text.fontSize = fontSize;
+        _text.SetText(text);
+        transform.position = pos;
+        _text.color = data.color;
+        _text.fontSize = data.fontSize;
 
         _seq = DOTween.Sequence();
-        _seq.Append(transform.DOMove(lastPos, duration));
-        _seq.Join(_text.DOFade(0, duration));
-        _seq.AppendCallback(() =>
-        {
-            PoolManager.Push(PoolType, gameObject);
-        });
+        _seq.Append(transform.DOMove(lastPos, data.duration));
+        _seq.AppendCallback(() => { Callback?.Invoke(); });
+        _seq.Append(_text.DOFade(0f, data.fadeDuration));
+        _seq.AppendCallback(() => { PoolManager.Push(poolType, gameObject); });
     }
 
     public void PunchPopup(PopupDataSO data, string text, Vector2 pos, Action Callback = null)

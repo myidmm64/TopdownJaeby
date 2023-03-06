@@ -14,6 +14,8 @@ public class AgentInput : MonoBehaviour
     private UnityEvent OnDashKeyPress = null;
     [SerializeField]
     private UnityEvent OnAttackKeyPress = null;
+    [SerializeField]
+    private UnityEvent OnInteractKeyPress = null;
 
     private Vector2 _moveInputVec = Vector2.zero;
     public Vector2 MoveInputVec => _moveInputVec;
@@ -38,7 +40,14 @@ public class AgentInput : MonoBehaviour
         GetPointerInput();
         GetMovementInput();
         GetDashInput();
+        GetInteractInput();
         GetAttackInput();
+    }
+
+    private void GetInteractInput()
+    {
+        if (Input.GetMouseButtonDown(0))
+            OnInteractKeyPress?.Invoke();
     }
 
     private void GetAttackInput()
@@ -49,7 +58,7 @@ public class AgentInput : MonoBehaviour
 
     private void GetDashInput()
     {
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetKeyDown(KeyCode.Space))
             OnDashKeyPress?.Invoke();
     }
 

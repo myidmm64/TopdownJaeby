@@ -9,12 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8408cc6631eaf54a8727e4f0c378738, type: 3}
-  m_Name: PlayerMovementData
+  m_Script: {fileID: 11500000, guid: 1302ad094a01abb428451156b8c29457, type: 3}
+  m_Name: TutorialPopUPdata
   m_EditorClassIdentifier: 
-  speed: 4
-  maxSpeed: 5
-  accaleration: 30
-  deceleration: 50
-  dashChargetime: 0.15
-  dashPower: 8
+  popupType: 1
+  fontSize: 3.5
+  color: {r: 1, g: 1, b: 1, a: 1}
+  duration: 0.3
+  fadeDuration: 0.5
+  punchSize: 0

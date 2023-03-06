@@ -25,11 +25,8 @@ public class NPC : MonoBehaviour
     public DialogDataSO dialogDataSO => _dialogDataSO;
     #endregion
 
-    private void Start()
+    protected virtual void Start()
     {
-        _nameText.SetText(_npcDataSO.npcName);
-        _subNameText.SetText(_npcDataSO.subName);
-        _subNameText.color = _npcDataSO.subColor;
         _doInteractObj.SetActive(false);
     }
 
@@ -39,9 +36,9 @@ public class NPC : MonoBehaviour
             TryDialog();
     }
 
-    public void TryDialog()
+    public virtual void TryDialog()
     {
-        if (_doInteractObj.activeSelf == false || _dialoging)
+        if (_doInteractObj.activeSelf == false || _dialoging || _dialogDataSO == null)
             return;
         if(DialogManager.Instance.DialogStart(_dialogDataSO, () => { _dialogDataSO = _dialogDataSO.nextData; _dialoging = false; }))
         {
@@ -67,5 +64,15 @@ public class NPC : MonoBehaviour
         {
             _doInteractObj.SetActive(false);
         }
+    }
+
+    private void OnValidate()
+    {
+        if (_npcDataSO == null)
+            return;
+
+        _nameText.SetText(_npcDataSO.npcName);
+        _subNameText.SetText(_npcDataSO.subName);
+        _subNameText.color = _npcDataSO.subColor;
     }
 }

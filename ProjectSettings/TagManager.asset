@@ -54,6 +54,9 @@ TagManager:
   - name: Agent
     uniqueID: 750554803
     locked: 0
+  - name: Effect
+    uniqueID: 4141818131
+    locked: 0
   - name: UI
     uniqueID: 681987777
     locked: 0

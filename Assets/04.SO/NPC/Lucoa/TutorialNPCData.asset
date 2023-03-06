@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2390382bb401a594fa0db2fb42dc187a, type: 3}
+  m_Name: TutorialNPCData
+  m_EditorClassIdentifier: 
+  faceSprite: {fileID: 21300000, guid: f1e170aeafd3b33478033d1efcc06236, type: 3}
+  npcName: "\uD558\uAC70\uC2A4"
+  subName: "\uCD0C\uC7A5"
+  subColor: {r: 0.44979116, g: 1, b: 0.427451, a: 1}
