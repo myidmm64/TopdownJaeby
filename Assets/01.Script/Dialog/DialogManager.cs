@@ -8,6 +8,8 @@ using UnityEngine.UI;
 
 public class DialogManager : MonoSingleTon<DialogManager>
 {
+    private Player _player = null;
+
     private Coroutine _dialogCoroutine = null;
     private bool _excuting = false;
     private bool _input = false;
@@ -32,6 +34,7 @@ public class DialogManager : MonoSingleTon<DialogManager>
     {
         _sb = new StringBuilder();
         _dialogCanvas.SetActive(false);
+        _player = FindObjectOfType<Player>();
     }
 
     public void DialogForceExit()
@@ -66,6 +69,8 @@ public class DialogManager : MonoSingleTon<DialogManager>
 
     private IEnumerator DialogCoroutine(DialogDataSO data, Action Callback = null)
     {
+        _player.EntityActionExit(ActionType.MeleeAttack, ActionType.Dash, ActionType.Move);
+        _player.AgentInput.enabled = false;
         _sb.Clear();
         DialogData curData = null;
         for (int i = 0; i < data.dialogDatas.Count; i++)
@@ -80,7 +85,7 @@ public class DialogManager : MonoSingleTon<DialogManager>
             for (int j = 0; j < curData.dialogs.Count; j++)
             {
                 string targetText = curData.dialogs[j];
-                for(int k = 0; k < targetText.Length; k++) // 텍스트 제작
+                for (int k = 0; k < targetText.Length; k++) // 텍스트 제작
                 {
                     if (_input)
                     {
@@ -99,6 +104,7 @@ public class DialogManager : MonoSingleTon<DialogManager>
             }
         }
 
+        _player.AgentInput.enabled = true;
         DialogEnd();
         Callback?.Invoke();
         //ActionKey로 Aciton
@@ -115,7 +121,7 @@ public class DialogManager : MonoSingleTon<DialogManager>
     {
         if (_excuting == false || _input)
             return;
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             _input = true;
         }

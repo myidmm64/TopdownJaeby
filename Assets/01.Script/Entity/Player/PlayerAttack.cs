@@ -66,7 +66,7 @@ public class PlayerAttack : AgentAttack
 
     public void AttackColliderCreate()
     {
-        Collider2D[] targets = Physics2D.OverlapCircleAll((Vector2)transform.position + _player.GetDir(), 1f);
+        Collider2D[] targets = Physics2D.OverlapCircleAll((Vector2)transform.position + _player.GetDir() * 0.5f, 0.6f);
         for (int i = 0; i < targets.Length; i++)
             if ((targets[i].gameObject.layer & (1 << _attackLayer)) != 0)
                 targets[i].GetComponent<AgentHP>().Hit(_entity.attackSO.baseAttackData.damages[_attackIndex]);

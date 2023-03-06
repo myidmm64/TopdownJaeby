@@ -83,7 +83,10 @@ public class AgentMove : EntityAction
 
     public override void ActionExit()
     {
+        _movementDirection = Vector2.zero;
+        _currentVelocity = 0;
         VeloCityResetImm(true,true);
         _rigid.velocity = Vector2.zero;
+        _entity.AgentAnimation.MoveAnimation(Vector2.zero);
     }
 }

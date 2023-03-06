@@ -13,7 +13,6 @@ public class TutorialNPC : NPC
     protected override void Start()
     {
         base.Start();
-        DoDialog();
     }
 
     public void DoDialog()
@@ -21,7 +20,13 @@ public class TutorialNPC : NPC
         if (_index >= _dialogs.Count)
             return;
 
-        PopupManager.Instance.Popup(_popupData, _dialogs[_index], transform.position, DoDialog);
+        PopupManager.Instance.Popup(_popupData, _dialogs[_index], (Vector2)transform.position + Vector2.up * 0.8f, DoDialog);
         _index++;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+            DoDialog();
     }
 }
