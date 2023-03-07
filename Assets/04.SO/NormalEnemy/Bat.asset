@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Bat
   m_EditorClassIdentifier: 
   detectLength: 5
-  attackLength: 1.5
+  attackLength: 0.5
+  bullet: {fileID: 0}

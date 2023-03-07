@@ -121,7 +121,7 @@ public class DialogManager : MonoSingleTon<DialogManager>
     {
         if (_excuting == false || _input)
             return;
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Space))
         {
             _input = true;
         }

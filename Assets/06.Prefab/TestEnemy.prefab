@@ -111,6 +111,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8322279751443999193}
   - component: {fileID: 8322279751443999198}
+  - component: {fileID: 5584541039938164475}
   m_Layer: 5
   m_Name: Slider
   m_TagString: Untagged
@@ -192,6 +193,18 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!225 &5584541039938164475
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8322279751443999192}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &8322279751456939670
 GameObject:
   m_ObjectHideFlags: 0
@@ -407,9 +420,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hitDataSO: {fileID: 11400000, guid: 802cfba7efc4907439c610d5ad186be9, type: 2}
   _hpSlider: {fileID: 8322279751443999198}
+  _sliderGroup: {fileID: 5584541039938164475}
   _hpText: {fileID: 0}
   _hpDownTime: 0.15
-  _maxHP: 50
+  _maxHP: 15
+  _sliderFadeDuration: 0.2
+  _sliderEnableCooltime: 1
 --- !u!114 &8322279751841170797
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -422,7 +438,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c889f2e85192f2649a0e54b9c6085571, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _movementDataSO: {fileID: 11400000, guid: 95d24e069c0f83c439ba3c5cc64ca8f5, type: 2}
+  _movementDataSO: {fileID: 11400000, guid: ea64a346a5f709b428ad78fb088cc7f6, type: 2}
   _attackSO: {fileID: 11400000, guid: 3e84a115607400a4da68bd834c6af43e, type: 2}
   _enemySO: {fileID: 11400000, guid: b5483201cfd5e994a86467ec378ac728, type: 2}
 --- !u!114 &8322279751841170796

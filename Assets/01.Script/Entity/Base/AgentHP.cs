@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class AgentHP : MonoBehaviour
 {
@@ -11,6 +12,9 @@ public class AgentHP : MonoBehaviour
 
     [SerializeField]
     private Slider _hpSlider = null;
+    [SerializeField]
+    private CanvasGroup _sliderGroup = null;
+
     [SerializeField]
     private TextMeshProUGUI _hpText = null;
     [SerializeField]
@@ -34,16 +38,32 @@ public class AgentHP : MonoBehaviour
     }
     private Coroutine _hpCoroutine = null;
 
+    [SerializeField]
+    private float _sliderFadeDuration = 0.2f;
+    [SerializeField]
+    private float _sliderEnableCooltime = 1f;
+    private Coroutine _sliderEnableCoroutine = null;
+
+    private IEnumerator SliderEnableCoroutine()
+    {
+        //_sliderGroup.DOFade(1f, _sliderFadeDuration);
+        _sliderGroup.alpha = 1f;
+        yield return new WaitForSeconds(_sliderEnableCooltime);
+        _sliderGroup.DOFade(0f, _sliderFadeDuration);
+    }
+
     private void Start()
     {
         _hpSlider.maxValue = _maxHP;
         _hpSlider.minValue = 0;
         HP = _maxHP;
+        if (_sliderGroup != null)
+            _sliderGroup.alpha = 0f;
     }
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             HP -= 10;
         }
@@ -55,7 +75,7 @@ public class AgentHP : MonoBehaviour
         bool down = start > end;
         _hpSlider.value = start;
         float time = 0f;
-        while(time <= 1f)
+        while (time <= 1f)
         {
             time += Time.deltaTime * (1f / _hpDownTime);
             float delta = (start - end) * time;
@@ -74,6 +94,13 @@ public class AgentHP : MonoBehaviour
         PoolManager.Pop((HP == 0) ? _hitDataSO.dieEffect : _hitDataSO.hitEffect).transform.position = transform.position;
         if (HP == 0)
             Die();
+
+        if (_sliderGroup != null)
+        {
+            if (_sliderEnableCoroutine != null)
+                StopCoroutine(_sliderEnableCoroutine);
+            _sliderEnableCoroutine = StartCoroutine(SliderEnableCoroutine());
+        }
     }
 
     private void Die()
