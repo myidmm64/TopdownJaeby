@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f9dd24b4209bdd419905e37e905a8fd, type: 3}
   m_Name: NormalHitData
   m_EditorClassIdentifier: 
-  emplitude: 5
-  intensity: 3
+  emplitude: 2.5
+  intensity: 2
   cameraDuration: 0.15
   startScale: 0.2
   hitTimeDuration: 0.05
